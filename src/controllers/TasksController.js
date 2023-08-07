@@ -1,7 +1,8 @@
 class TasksController {
 	async create(request, response) {
 		const { title, date, frequency } = request.body
-		const taskId = Math.random()
+
+		return response.status(200).json({ title, date, frequency })
 	}
 }
 
