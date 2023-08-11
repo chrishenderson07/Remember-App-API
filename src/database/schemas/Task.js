@@ -7,8 +7,12 @@ const Task = new Schema({
 		type: String,
 		required: true,
 	},
-	email: {
-		type: String,
+	date: {
+		type: Date.parse(Date.now()),
+		required: true,
+	},
+	frequency: {
+		type: Number,
 		required: true,
 	},
 })

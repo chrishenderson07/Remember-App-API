@@ -1,10 +1,11 @@
 const Task = require('../database/schemas/Task')
 
 class TasksRepository {
-	async create({ name, email }) {
+	async create({ name, date, frequency }) {
 		const task = await Task.create({
 			name,
-			email,
+			date,
+			frequency,
 		})
 		return task
 	}
@@ -31,7 +32,9 @@ class TasksRepository {
 		return deleteTask
 	}
 
-	async deleteAll() {}
+	async deleteAll() {
+		await Task.deleteMany()
+	}
 }
 
 module.exports = new TasksRepository()
