@@ -1,32 +1,24 @@
 describe('TasksController', () => {
 	it('task name should is filled', () => {
 		const name = 'tasks'
-		const email = 'test@example.com'
+		const date = "12/12/2023"
+		const frequency = 2
 
-		function create(name, email) {
+		function create(name, date,frequency) {
 			const task = {
 				name,
-				email,
+				date,
+				frequency,
 			}
 
 			return task
 		}
-		const task = create(name, email)
+		const task = create(name, date, frequency)
 
 		expect(task.name).toBeTruthy()
 	})
 
-	it('email should not be empty', () => {
-		function create(name, email) {
-			const task = {
-				name,
-				email,
-			}
+	it("frequency shoud be more than 1", ()=> {
 
-			return task
-		}
-		const task = create('emailTest', 'emaildeteste@gmail.com')
-
-		expect(task.email).toBeTruthy()
 	})
 })

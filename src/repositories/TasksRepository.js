@@ -27,6 +27,15 @@ class TasksRepository {
 		return task
 	}
 
+	async update({ taskId, name, date, frequency }) {
+		const updatedTask = await Task.findByIdAndUpdate(taskId, {
+			name,
+			date,
+			frequency,
+		})
+		return updatedTask
+	}
+
 	async deleteOne(id) {
 		const deleteTask = await Task.deleteOne({ _id: id })
 		return deleteTask

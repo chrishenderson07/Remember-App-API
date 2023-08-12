@@ -34,27 +34,44 @@ class TasksController {
 
 	async index(request, response) {
 		const tasks = await TasksRepository.findAll()
+		if (!tasks) {
+			return response.json('Tasks not found')
+		}
 		return response.json(tasks)
 	}
 
 	async show(request, response) {
 		const { _id } = request.params
 
-
 		const task = await TasksRepository.findById(_id)
-		
-		if(!task) {
-			return response.status(400).json("Task not found")
+
+		if (!task) {
+			return response.status(400).json('Task not found')
 		}
 
-
 		return response.json(task)
+	}
+
+	async update(request, response) {
+		const { _id } = request.params
+		const { name, date, frequency } = request.body
+
+		const updatedTask = await TasksRepository.update(_id, {
+			name,
+			date,
+			frequency,
+		})
+
+		return response.status(200).json(updatedTask)
 	}
 
 	async delete(request, response) {
 		const { _id } = request.params
 		const taskId = await TasksRepository.findById(_id)
 
+		if (!taskId) {
+			throw new AppError(400, "Task not Found")
+		}
 		await TasksRepository.deleteOne(taskId)
 
 		response.json()
