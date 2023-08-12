@@ -8,8 +8,8 @@ const Task = new Schema({
 		required: true,
 	},
 	date: {
-		type: Date.parse(Date.now()),
-		required: true,
+		type: String,
+		default: Date.now(),
 	},
 	frequency: {
 		type: Number,

@@ -1,11 +1,11 @@
-const Task = require('../database/schemas/Task')
 const TasksRepository = require('../repositories/TasksRepository')
 
+const AppError = require('../utils/AppError')
 class TasksController {
 	async create(request, response) {
-		const { name, date, frequency } = request.body
+		const { name, frequency } = request.body
 
-		if (!name || !date || !frequency) {
+		if (!name || !frequency) {
 			return response
 				.status(400)
 				.json({ error: 'Name, Date and Frequency is required' })
@@ -20,7 +20,6 @@ class TasksController {
 		try {
 			const task = await TasksRepository.create({
 				name,
-				date,
 				frequency,
 			})
 
@@ -56,11 +55,7 @@ class TasksController {
 		const { _id } = request.params
 		const { name, date, frequency } = request.body
 
-		const updatedTask = await TasksRepository.update(_id, {
-			name,
-			date,
-			frequency,
-		})
+		const updatedTask = await TasksRepository.update(_id, name, date, frequency)
 
 		return response.status(200).json(updatedTask)
 	}
@@ -70,7 +65,7 @@ class TasksController {
 		const taskId = await TasksRepository.findById(_id)
 
 		if (!taskId) {
-			throw new AppError(400, "Task not Found")
+			throw new AppError(400, 'Task not Found')
 		}
 		await TasksRepository.deleteOne(taskId)
 
