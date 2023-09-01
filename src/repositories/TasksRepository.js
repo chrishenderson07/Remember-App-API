@@ -1,9 +1,10 @@
 const Task = require('../database/schemas/Task')
 
 class TasksRepository {
-	async create({ name, frequency }) {
+	async create({ name, date, frequency }) {
 		const task = await Task.create({
 			name,
+			date,
 			frequency,
 		})
 		return task
@@ -29,9 +30,8 @@ class TasksRepository {
 	async update(_id, name, date, frequency) {
 		const filter = { _id }
 
-		const newDate = new Date(date)
+		const newDate = new Date(date).toLocaleDateString()
 
-		console.log(newDate)
 		const task = {
 			name,
 			date: newDate,

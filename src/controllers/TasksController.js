@@ -1,9 +1,10 @@
 const TasksRepository = require('../repositories/TasksRepository')
+const EmailSender = require('../services/emailSender')
 
 const AppError = require('../utils/AppError')
 class TasksController {
 	async create(request, response) {
-		const { name, frequency } = request.body
+		const { name, date, frequency } = request.body
 
 		if (!name || !frequency) {
 			return response
@@ -20,6 +21,7 @@ class TasksController {
 		try {
 			const task = await TasksRepository.create({
 				name,
+				date,
 				frequency,
 			})
 
@@ -68,6 +70,9 @@ class TasksController {
 			throw new AppError(400, 'Task not Found')
 		}
 		await TasksRepository.deleteOne(taskId)
+
+		const emailSender = new EmailSender()
+		emailSender.sendEmail()
 
 		response.json()
 	}

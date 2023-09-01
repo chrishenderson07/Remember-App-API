@@ -9,11 +9,15 @@ const Task = new Schema({
 	},
 	date: {
 		type: String,
-		default: Date.now(),
+		default: new Date().toLocaleDateString(),
 	},
 	frequency: {
 		type: Number,
 		required: true,
+	},
+	lastNotificationTime: {
+		type: Date,
+		default: new Date(),
 	},
 })
 
