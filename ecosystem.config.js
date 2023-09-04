@@ -1,7 +1,7 @@
 module.exports = {
 	apps: [
 		{
-			name: 'Remember App',
+			name: 'app',
 			script: './src/server.js',
 			instances: 'max',
 			env: {
