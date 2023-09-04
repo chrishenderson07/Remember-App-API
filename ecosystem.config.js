@@ -3,7 +3,7 @@ module.exports = {
 		{
 			name: 'Remember App',
 			script: './src/server.js',
-			instance: 'max',
+			instances: 'max',
 			env: {
 				NODE_ENV: 'development',
 			},
