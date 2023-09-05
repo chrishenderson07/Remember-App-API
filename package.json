@@ -4,7 +4,11 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
+<<<<<<< HEAD
 		"start": "node ./src/server.js",
+=======
+		"start": "pm2 start ecosystem.config.js",
+>>>>>>> c4734f0c9c2543861ceb0922bb87987568ae8f8b
 		"dev": "nodemon ./src/server.js",
 		"test": "jest"
 	},
