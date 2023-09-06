@@ -1,5 +1,4 @@
 const TasksRepository = require('../repositories/TasksRepository')
-const EmailSender = require('../services/emailSender')
 
 const AppError = require('../utils/AppError')
 class TasksController {
@@ -70,9 +69,6 @@ class TasksController {
 			throw new AppError(400, 'Task not Found')
 		}
 		await TasksRepository.deleteOne(taskId)
-
-		const emailSender = new EmailSender()
-		emailSender.sendEmail()
 
 		response.json()
 	}
