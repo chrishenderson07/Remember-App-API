@@ -11,7 +11,13 @@ const schedule = require('./services/notifications')
 const app = express()
 const PORT = process.env.PORT || 3000
 
-mongoose.connect('mongodb://localhost:27017/rememberApp')
+const mongoUsername = process.env.MONGODB_USERNAME
+const mongoPassword = process.env.MONGODB_PASSWORD
+const mongoCluster = process.env.MONGODB_CLUSTER_NAME
+
+mongoose.connect(
+	`mongodb+srv://${mongoUsername}:${mongoPassword}@${mongoCluster}.er6tyoo.mongodb.net/?retryWrites=true&w=majority`,
+)
 
 app.use(cors())
 app.use(express.json())
